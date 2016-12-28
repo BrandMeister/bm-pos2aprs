@@ -4,7 +4,7 @@
 
 		foreach ($db as $db_entry_key => $db_entry) {
 			if (time()-$db_entry['ts'] > 6) {
-				echo "db clean: removing $db_entry_key\n";
+				echo '[' . date('H:i:s') . "]db clean: removing $db_entry_key\n";
 				unset($db[$db_entry_key]);
 			}
 		}

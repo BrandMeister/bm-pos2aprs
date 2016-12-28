@@ -199,14 +199,20 @@
 
 		$dst_id = sql_get_dmr_id_for_callsign($sql, aprs_remove_ssid_from_callsign($dst_callsign), aprs_get_ssid_from_callsign($dst_callsign));
 		if (!$dst_id) {
-			echo "  dst dmr id can't be resolved\n";
-			return;
+			$dst_id = sql_get_dmr_id_for_callsign($sql, aprs_remove_ssid_from_callsign($dst_callsign));
+			if (!$dst_id) {
+				echo "  dst dmr id can't be resolved\n";
+				return;
+			}
 		}
 		echo "  dst dmr id: $dst_id\n";
 		$src_id = sql_get_dmr_id_for_callsign($sql, aprs_remove_ssid_from_callsign($src_callsign), aprs_get_ssid_from_callsign($src_callsign));
 		if (!$src_id) {
-			echo "  src dmr id can't be resolved\n";
-			return;
+			$src_id = sql_get_dmr_id_for_callsign($sql, aprs_remove_ssid_from_callsign($src_callsign));
+			if (!$src_id) {
+				echo "  src dmr id can't be resolved\n";
+				return;
+			}
 		}
 		echo "  src dmr id: $src_id\n";
 
