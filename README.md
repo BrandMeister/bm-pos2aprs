@@ -19,8 +19,6 @@ you will have the symbol of a walking person.
 
 - You'll need PHP CLI (ex. php5-cli).
 - Rename (and edit) *config-example.inc.php* to *config.inc.php*.
-- The Registry MySQL database is the database found on each Brandmeister server.
-  Make sure your database user has select access rights on Registry database tables.
 - You have to set the APRSGate's number to a not used number (for ex. 5060) in
   BrandMeister.conf. This ensures that Brandmeister will not upload positions on
   it's own, and lets this script do the job.
