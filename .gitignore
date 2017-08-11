@@ -1,3 +1,4 @@
 config.inc.php
 *.log
+*.log.1
 *.log.*.gz
