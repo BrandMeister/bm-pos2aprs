@@ -14,34 +14,36 @@
 		global $db;
 
 		$msg = json_decode($msg);
-		switch ($msg->Event) {
-			case 'Session-Start':
-				if (($msg->SessionType != SESSION_TYPE_CONTROL_BLOCK &&
-					$msg->SessionType != SESSION_TYPE_PRIVATE_DATA) ||
-					!is_dstid_valid($msg->DestinationID))
+		if ($msg) {
+			switch ($msg->Event) {
+				case 'Session-Start':
+					if (($msg->SessionType != SESSION_TYPE_CONTROL_BLOCK &&
+						$msg->SessionType != SESSION_TYPE_PRIVATE_DATA) ||
+						!is_dstid_valid($msg->DestinationID))
+							return;
+
+					echo '[' . date('H:i:s') . "] session start, storing pos. report start for $msg->SourceID in db\n";
+					$db[$msg->SourceID] = array();
+					$db[$msg->SourceID]['ts'] = time();
+					$db[$msg->SourceID]['repeaterid'] = $msg->ContextID;
+					$db[$msg->SourceID]['dstid'] = $msg->DestinationID;
+					break;
+				case 'Location-Report':
+					if (!array_key_exists($msg->SourceID, $db))
 						return;
 
-				echo '[' . date('H:i:s') . "] session start, storing pos. report start for $msg->SourceID in db\n";
-				$db[$msg->SourceID] = array();
-				$db[$msg->SourceID]['ts'] = time();
-				$db[$msg->SourceID]['repeaterid'] = $msg->ContextID;
-				$db[$msg->SourceID]['dstid'] = $msg->DestinationID;
-				break;
-			case 'Location-Report':
-				if (!array_key_exists($msg->SourceID, $db))
-					return;
+					echo '[' . date('H:i:s') . "] got location report\n";
+					aprs_send_location($msg);
+					break;
+				case 'Session-Stop':
+					if (!is_dstid_valid($msg->DestinationID) ||
+						!array_key_exists($msg->SourceID, $db))
+							return;
 
-				echo '[' . date('H:i:s') . "] got location report\n";
-				aprs_send_location($msg);
-				break;
-			case 'Session-Stop':
-				if (!is_dstid_valid($msg->DestinationID) ||
-					!array_key_exists($msg->SourceID, $db))
-						return;
-
-				echo '[' . date('H:i:s') . "] session stop, removing $msg->SourceID from db\n";
-				unset($db[$msg->SourceID]);
-				break;
+					echo '[' . date('H:i:s') . "] session stop, removing $msg->SourceID from db\n";
+					unset($db[$msg->SourceID]);
+					break;
+			}
 		}
 
 		db_clean();

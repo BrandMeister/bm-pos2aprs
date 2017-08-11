@@ -24,40 +24,51 @@ you will have the symbol of a walking person.
 - You have to set the APRSGate's number to a not used number (for ex. 5060) in
   BrandMeister.conf. This ensures that Brandmeister will not upload positions on
   it's own, and lets this script do the job.
+- Give read permissions to the Profiles space in Tarantool.
 
-To use multiple service IDs, you have to adjust ServiceWrapper settings in
-BrandMeister.conf for all LOCATION_SERVICE_ID**x** setting:
+  Execute the following to open Tarantool's console:
+  ```
+  tarantoolctl connect /tmp/Registry.sock
+  ```
 
-```
-// ServiceWrapper Application
-ServiceWrapper :
-{
-  // List of mapped service IDs:
-  // <Type>, <Private ID>
-  // Where <Type> in:
-  //   1 - Registration Service
-  //   2 - Messaging Service
-  //   3 - Telemetry Service
-  //   4 - Location Service
+  Then enter:
+  ```
+  box.schema.user.grant('api', 'read', 'space', 'Profiles',{if_not_exists = true})
+  ```
 
-  numbers =
-  [
-    1, 216999,
-    2, 216990,
-    3, 216999,
-    4, 5050,
-    4, 5051,
-    4, 5052,
-    4, 5053,
-    4, 5054,
-    4, 5055,
-    4, 5056,
-    4, 5057,
-    4, 5058,
-    4, 5059
-  ];
-};
-```
+- To use multiple service IDs, you have to adjust ServiceWrapper settings in
+  BrandMeister.conf for all LOCATION_SERVICE_ID**x** setting:
+
+  ```
+  // ServiceWrapper Application
+  ServiceWrapper :
+  {
+    // List of mapped service IDs:
+    // <Type>, <Private ID>
+    // Where <Type> in:
+    //   1 - Registration Service
+    //   2 - Messaging Service
+    //   3 - Telemetry Service
+    //   4 - Location Service
+
+    numbers =
+    [
+      1, 216999,
+      2, 216990,
+      3, 216999,
+      4, 5050,
+      4, 5051,
+      4, 5052,
+      4, 5053,
+      4, 5054,
+      4, 5055,
+      4, 5056,
+      4, 5057,
+      4, 5058,
+      4, 5059
+    ];
+  };
+  ```
 
 ### Running as a daemon
 

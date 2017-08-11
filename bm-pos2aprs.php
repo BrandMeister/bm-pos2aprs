@@ -25,7 +25,8 @@
 
 	include('config.inc.php');
 	include('mqtt.inc.php');
-	include('sql.inc.php');
+	include('tnt.inc.php');
+	include('dbus.inc.php');
 	include('aprs.inc.php');
 	include('helper.inc.php');
 	include(PHPMQTT_PATH);
@@ -37,8 +38,8 @@
 		return 1;
 	}
 
-	$topics['Master/' . NETWORK_ID . '/Session'] = array('qos' => 0, 'function' => 'mqtt_procmsg');
-	$topics['Master/' . NETWORK_ID . '/Service'] = array('qos' => 0, 'function' => 'mqtt_procmsg');
+	$topics['Master/' . NETWORK_ID . '/Session/#'] = array('qos' => 0, 'function' => 'mqtt_procmsg');
+	$topics['Master/' . NETWORK_ID . '/Service/#'] = array('qos' => 0, 'function' => 'mqtt_procmsg');
 	$mqtt->subscribe($topics, 0);
 
 	echo '[' . date('H:i:s') . "] connecting to aprs...\n";

@@ -53,22 +53,23 @@
 		foreach (get_object_vars($location) as $key => $value)
 			echo "      $key: $value\n";
 
-		$sql = sql_connect();
-		if ($sql === false)
+		$tnt = tnt_connect();
+		if ($tnt === false)
 			return;
 
-		$src_callsign = sql_get_callsign_for_dmr_id($sql, $location->SourceID, DMR_DB_USERS_TABLE);
+		$src_callsign = tnt_get_callsign_for_dmr_id($tnt, $location->SourceID);
 		if ($src_callsign === false) {
 			echo "    can't get source callsign\n";
 			return;
 		}
 		echo "    src callsign: $src_callsign\n";
 
-		$repeater_callsign = sql_get_callsign_for_dmr_id($sql, $repeaterid, DMR_DB_REPEATERS_TABLE);
+		$dbus_data = dbus_get_data();
+		$repeater_callsign = dbus_get_callsign_for_dmr_id($dbus_data, $repeaterid);
 		if ($repeater_callsign === false || $repeater_callsign == '') {
-			echo "    can't get repeater callsign, searching in users table\n";
+			echo "    can't get repeater callsign, searching for id in users\n";
 
-			$repeater_callsign = sql_get_callsign_for_dmr_id($sql, $repeaterid, DMR_DB_USERS_TABLE);
+			$repeater_callsign = tnt_get_callsign_for_dmr_id($tnt, $repeaterid);
 			if ($repeater_callsign === false) {
 				echo "    can't get repeater callsign\n";
 				return;
@@ -76,7 +77,7 @@
 		}
 		echo "    repeater callsign: $repeater_callsign\n";
 
-		$aprs_text = sql_get_aprs_text_for_dmr_id($sql, $location->SourceID);
+		$aprs_text = tnt_get_aprs_text_for_dmr_id($tnt, $location->SourceID);
 		if ($aprs_text === false)
 			$aprs_text = 'DMR ID: ' . $location->SourceID;
 		echo "    aprs text: $aprs_text\n";
@@ -137,7 +138,7 @@
 				$gpspos_callsign = "$src_callsign-9";
 			}
 		} else {
-			$symbol_ssid = sql_get_aprs_symbol_and_ssid_for_dmr_id($sql, $location->SourceID);
+			$symbol_ssid = tnt_get_aprs_symbol_and_ssid_for_dmr_id($tnt, $location->SourceID);
 			if (!$symbol_ssid) {
 				$aprs_symbol1 = '/';
 				$aprs_symbol2 = '[';
@@ -149,7 +150,7 @@
 			}
 		}
 
-		$sql->close();
+		$tnt->disconnect();
 
 		$tosend = "$gpspos_callsign>APRS,$repeater_callsign*,qAR,$repeater_callsign:@${timestamp}z" .
 			"$latitude$aprs_symbol1$longitude$aprs_symbol2$coursespeed$aprs_text\n";
@@ -193,22 +194,23 @@
 		$msg_text = trim(substr($msg_data, $dst_callsign_endpos+1));
 		echo "  msg text: $msg_text\n";
 
-		$sql = sql_connect();
-		if ($sql === false)
+		$tnt = tnt_connect();
+		if ($tnt === false)
 			return;
 
-		$dst_id = sql_get_dmr_id_for_callsign($sql, aprs_remove_ssid_from_callsign($dst_callsign), aprs_get_ssid_from_callsign($dst_callsign));
+		$dbus_data = dbus_get_data();
+		$dst_id = dbus_get_dmr_id_for_callsign($dbus_data, $dst_callsign);
 		if (!$dst_id) {
-			$dst_id = sql_get_dmr_id_for_callsign($sql, aprs_remove_ssid_from_callsign($dst_callsign));
+			$dst_id = dbus_get_dmr_id_for_callsign($dbus_data, aprs_remove_ssid_from_callsign($dst_callsign));
 			if (!$dst_id) {
 				echo "  dst dmr id can't be resolved\n";
 				return;
 			}
 		}
 		echo "  dst dmr id: $dst_id\n";
-		$src_id = sql_get_dmr_id_for_callsign($sql, aprs_remove_ssid_from_callsign($src_callsign), aprs_get_ssid_from_callsign($src_callsign));
+		$src_id = dbus_get_dmr_id_for_callsign($dbus_data, $src_callsign);
 		if (!$src_id) {
-			$src_id = sql_get_dmr_id_for_callsign($sql, aprs_remove_ssid_from_callsign($src_callsign));
+			$src_id = dbus_get_dmr_id_for_callsign($dbus_data, aprs_remove_ssid_from_callsign($src_callsign));
 			if (!$src_id) {
 				echo "  src dmr id can't be resolved\n";
 				return;
@@ -216,7 +218,7 @@
 		}
 		echo "  src dmr id: $src_id\n";
 
-		$sql->close();
+		$tnt->disconnect();
 
 		mqtt_send_sms($dst_id, $src_id, $msg_text);
 	}

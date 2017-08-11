@@ -32,11 +32,9 @@
 	define('APRS_SERVER',					'hun.aprs2.net');
 	define('APRS_SERVER_PORT',				14580);
 
-	// MySQL user, password, host, Registry database name and table names.
-	define('DMR_DB_USER',					'ham-dmr.hu');
-	define('DMR_DB_PASSWORD',				'');
-	define('DMR_DB_HOST',					'localhost');
-	define('DMR_DB_NAME',					'Registry');
-	define('DMR_DB_USERS_TABLE',			'Users');
-	define('DMR_DB_REPEATERS_TABLE',		'Repeaters');
+	// Tarantool credentials.
+	define('TNT_HOST',						'localhost');
+	define('TNT_PORT',						3301);
+	define('TNT_USER',						'api');
+	define('TNT_PASSWORD',					''); // You can get the password from /var/www/html/api/config.php
 ?>
