@@ -31,7 +31,7 @@ you will have the symbol of a walking person.
 
   Then enter:
   ```
-  box.schema.user.grant('api', 'read', 'space', 'Profiles',{if_not_exists = true})
+  box.schema.user.grant('api', 'read', 'space', 'GlobalProfiles',{if_not_exists = true})
   ```
 
 - To use multiple service IDs, you have to adjust ServiceWrapper settings in

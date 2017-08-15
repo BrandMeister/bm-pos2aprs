@@ -9,23 +9,23 @@
 	}
 
 	function tnt_get_callsign_for_dmr_id($tnt, $id) {
-		$res = $tnt->select('Profiles', $id);
+		$res = $tnt->select('GlobalProfiles', $id);
 		if (count($res) < 1)
 			return false;
-		return $res[0][6];
+		return $res[0][7];
 	}
 
 	function tnt_get_aprs_text_for_dmr_id($tnt, $id) {
-		$res = $tnt->select('Profiles', $id);
+		$res = $tnt->select('GlobalProfiles', $id);
 		if (count($res) < 1)
 			return false;
-		return $res[0][9];
+		return $res[0][10];
 	}
 
 	function tnt_get_aprs_symbol_and_ssid_for_dmr_id($tnt, $id) {
-		$res = $tnt->select('Profiles', $id);
+		$res = $tnt->select('GlobalProfiles', $id);
 		if (count($res) < 1)
 			return false;
-		return array($res[0][8], $res[0][7]);
+		return array($res[0][9], $res[0][8]);
 	}
 ?>
