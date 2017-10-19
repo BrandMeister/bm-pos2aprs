@@ -152,7 +152,7 @@
 
 		$tnt->disconnect();
 
-		$tosend = "$gpspos_callsign>APRS,$repeater_callsign*,qAR,$repeater_callsign:@${timestamp}z" .
+		$tosend = "$gpspos_callsign>APBM1S,$repeater_callsign*,qAR,$repeater_callsign:@${timestamp}z" .
 			"$latitude$aprs_symbol1$longitude$aprs_symbol2$coursespeed$aprs_text\n";
 
 		echo "    aprs data: $tosend";
