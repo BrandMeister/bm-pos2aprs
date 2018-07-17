@@ -32,7 +32,7 @@
 	include(PHPMQTT_PATH);
 
 	echo '[' . date('H:i:s') . "] connecting to mqtt...\n";
-	$mqtt = new phpMQTT('localhost', 1883, __FILE__);
+	$mqtt = new phpMQTT('localhost', 1883, "Server-API".rand());
 	if (!$mqtt->connect()) {
 		echo "error: can't connect to mqtt\n";
 		return 1;
