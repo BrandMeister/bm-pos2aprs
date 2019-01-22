@@ -17,16 +17,16 @@ you will have the symbol of a walking person.
 
 Location service ID and symbol mappings:
 
-- LOCATION_SERVICE_ID0 (5050 by default): ![House](https://cdn.rawgit.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-house.png)
-- LOCATION_SERVICE_ID1 (5051 by default): ![Train](https://cdn.rawgit.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-train.png)
-- LOCATION_SERVICE_ID2 (5052 by default): ![Tractor](https://cdn.rawgit.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-tractor.png)
-- LOCATION_SERVICE_ID3 (5053 by default): ![Pickup](https://cdn.rawgit.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-pickup.png)
-- LOCATION_SERVICE_ID4 (5054 by default): ![Van](https://cdn.rawgit.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-van.png)
-- LOCATION_SERVICE_ID5 (5055 by default): ![Phone](https://cdn.rawgit.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-phone.png)
-- LOCATION_SERVICE_ID6 (5056 by default): ![Camp](https://cdn.rawgit.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-camp.png)
-- LOCATION_SERVICE_ID7 (5057 by default): ![Person](https://cdn.rawgit.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-person.png)
-- LOCATION_SERVICE_ID8 (5058 by default): ![Bike](https://cdn.rawgit.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-bike.png)
-- LOCATION_SERVICE_ID9 (5059 by default): ![Car](https://cdn.rawgit.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-car.png)
+- LOCATION_SERVICE_ID0 (5050 by default): ![House](https://raw.githubusercontent.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-house.png)
+- LOCATION_SERVICE_ID1 (5051 by default): ![Train](https://raw.githubusercontent.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-train.png)
+- LOCATION_SERVICE_ID2 (5052 by default): ![Tractor](https://raw.githubusercontent.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-tractor.png)
+- LOCATION_SERVICE_ID3 (5053 by default): ![Pickup](https://raw.githubusercontent.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-pickup.png)
+- LOCATION_SERVICE_ID4 (5054 by default): ![Van](https://raw.githubusercontent.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-van.png)
+- LOCATION_SERVICE_ID5 (5055 by default): ![Phone](https://raw.githubusercontent.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-phone.png)
+- LOCATION_SERVICE_ID6 (5056 by default): ![Camp](https://raw.githubusercontent.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-camp.png)
+- LOCATION_SERVICE_ID7 (5057 by default): ![Person](https://raw.githubusercontent.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-person.png)
+- LOCATION_SERVICE_ID8 (5058 by default): ![Bike](https://raw.githubusercontent.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-bike.png)
+- LOCATION_SERVICE_ID9 (5059 by default): ![Car](https://raw.githubusercontent.com/BrandMeister/bm-pos2aprs/master/contrib/symbol-car.png)
 
 ## Usage
 
